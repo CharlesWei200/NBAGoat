@@ -7,7 +7,7 @@ from streamlit_timeline import timeline
 from streamlit_option_menu import option_menu
 import json
 
-file_path = "C:/Users/charlesWei/Desktop/DataScience/Basketball1/"
+file_path = ""
 
 
 st.set_page_config(layout="wide")
