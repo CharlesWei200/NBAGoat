@@ -65,7 +65,7 @@ all_var.update(cat_var)
 
 shooting = pd.read_csv(file_path+"Shooting.csv")
 award = pd.read_csv(file_path+"Award.csv")
-players=pd.read_csv(file_path+"Players.csv")
+players_df=pd.read_csv(file_path+"Players.csv")
 
 award_winners = award[award["winner"]==True].copy
 
@@ -84,10 +84,10 @@ steph = shooting[shooting["player"]=="Stephen Curry"].sort_values("season").copy
 
 dpoy = award[award["award"]=="dpoy"].copy()
 
-award_player = pd.merge(left=players,right=award,on="player",how="outer")
+award_player = pd.merge(left=players_df,right=award,on="player",how="outer")
 
 shooting["clean_pos"] = shooting["pos"].replace(pos_dict)
-award["clean_pos"] = players["pos"].replace(pos_dict)
+award["clean_pos"] = players_df["pos"].replace(pos_dict)
 
 grouped = award.groupby("clean_pos")["pts_max"]
 award_won = award.groupby("clean_pos")["winner"]
@@ -97,10 +97,10 @@ win_count = award_won.count()
 #Creating winner column
 #era column
 bins = [1947,1954,1980,1991,2005,2025]
-players["era"] = pd.cut(players["season"],bins=bins,right=False,labels=["Early NBA","Early Modern Era","80's","90's","Modern NBA"])
+players_df["era"] = pd.cut(players_df["season"],bins=bins,right=False,labels=["Early NBA","Early Modern Era","80's","90's","Modern NBA"])
 
 key_stats = ["pts","ast","stl","blk"]
-players_era = players[["player","era"]+key_stats].groupby(["player","era"],observed=False).sum().reset_index()
+players_era = players_df[["player","era"]+key_stats].groupby(["player","era"],observed=False).sum().reset_index()
 players_era["sum_stats"] = players_era[key_stats].sum(axis=1)
 players_era = players_era[players_era["sum_stats"] > 0].copy()
 
@@ -112,7 +112,7 @@ def get_mean_div(players,stat,df_type):
     if df_type == "era":
         df = players_era
     elif df_type == "season":
-        df = players
+        df = players_df
     else:
         print("df_type not must be era or season")
         return None
@@ -144,19 +144,26 @@ std = get_mean_div(["Michael Jordan","LeBron James"],stat="pts",df_type="era")
 
 
 def AvgRating(era,stats):
-    players.loc[players["era"]==era,stats].mean()
+    players_df.loc[players_df["era"]==era,stats].mean()
     
     
 
 
 with st.sidebar: 
 	selected = option_menu(
-		menu_title = 'Navigation Panel',
-		options = ['Abstract', 'Background Information', 'Data Cleaning','Exploratory Analysis', 'Main Analysis', 'Conclusion', 'Bibliography'],
-		menu_icon = 'music-note-list',
-		icons = ['bookmark-check', 'book', 'box', 'map', 'file-earmark-music-fill', 'bar-chart', 'check2-circle'],
-		default_index = 0,
+		menu_title = 'Navigation Bar',
+		options = ['Abstract', 'Timeline','Background Information', 'Data Cleaning','Exploratory Analysis', 'Main Analysis', 'Conclusion', 'Bibliography'],
+		menu_icon = 'dribbble',
+		icons = ['file-person', 'calendar3','backpack3', 'trash', 'map', 'bar-chart-line', 'award', 'browser-chrome'],
+		default_index = 5,
 		)
+
+
+
+
+
+
+
 
 if selected=='Abstract':
     st.title("Abstract")
@@ -168,15 +175,33 @@ if selected=='Abstract':
     
     
     
-    
 
-if selected=='Background Information':
-    st.title("Background Information")
+if selected=='Timeline':
+    st.title("Timeline")
     
     with open("timeline.json","r") as f:
         data = json.load(f)
 
     timeline(data)
+
+
+
+
+
+
+
+if selected=='Background Information':
+    st.title("Background Information")
+    col1,col2 = st.columns([5,4])
+    col1.markdown("## Why do I want to compare `LeBron James` with `Michael Jordan`")
+    col1.markdown("""Michael Jordan Have been seen as the Greatest Basketball Player of all time since the 90's from both achievements and how he has affected the sport basketball, However there has been conversation about whether LeBron James is better than Jordan now. since LeBron James has won multiple champions and
+                  broke the total score record more and more people are starting to believe that LeBron is a better player""")
+    col1.markdown("## How would I compare the two player?")
+    col1.markdown("""I have found data sets on kaggle about all the data's in the previous NBA season which include point scored assist and many others I have chosen three main data set to use one standard information and one about a award, However it is unfair to compare player from different era's
+                  based on simple statistics such as points scored because they have played in different sets of rules and the skills sets, for example banning handcheck for defending makes scoring much more easier and smaller players are able to play players has been scoring way more than before. Therefore I have decided to calculate a standard value to compare them. By using the mean and standard deiviation of all the other players that have
+                  played in their era.By calculating how many standard dieviation away from other player that has played in there era I can see how stand out LeBron or Jordan is from their era I believe that by this is a fair way to compare the two players. Additionally Jordan and LeBron have played different amounts of games so using the average stats per game is a better way to compare them.""")
+    col2.image("Jordan_Lebron.png")
+    col1.markdown("I will be also comparing the effeciency of the two players by using the shooting percentage as high points could be achieved by taking more shoots which does not benifits the team for winning which means that it can not show that the player is better.")
         
     
     
@@ -227,7 +252,7 @@ if selected=='Exploratory Analysis':
     col3,col4 = st.columns([3,5])
     col3.markdown("Select up to 5 players")
     with st.form("Exploring points statistics through histograms"):
-        Player_Select2 = col3.multiselect("Select up to 5 players",players["player"].unique(),default=["Michael Jordan","LeBron James"],max_selections=5,key=4)
+        Player_Select2 = col3.multiselect("Select up to 5 players",players_df["player"].unique(),default=["Michael Jordan","LeBron James"],max_selections=5,key=4)
         y_col2 = col3.selectbox("Select a Numeric statistic to compare",list(num_var.values()),key=5)
         col2_agg = col3.radio("Select One",["Career Totals","Average Per Game"],key=6)
         col2_histfunc = "sum" if col2_agg == "Career Totals" else "avg"
@@ -238,7 +263,7 @@ if selected=='Exploratory Analysis':
         
         
         if submitted:
-            fig2 =  px.histogram(players[players["player"].isin(Player_Select2)],x="player",y=y_col2_df,color="player",color_discrete_sequence=color_pallet,histfunc=col2_histfunc,title=f"Player Compared by {y_col2}",labels=all_var)
+            fig2 =  px.histogram(players_df[players_df["player"].isin(Player_Select2)],x="player",y=y_col2_df,color="player",color_discrete_sequence=color_pallet,histfunc=col2_histfunc,title=f"Player Compared by {y_col2}",labels=all_var)
             fig2.update_yaxes(title_text=col2_agg)
             fig2.update_yaxes(title_text=f"<b>{col2_agg} For {y_col2}</b>")
             col4.plotly_chart(fig2)
@@ -252,13 +277,13 @@ if selected=='Exploratory Analysis':
     col5,col6 = st.columns([3,5])
     col5.markdown("Select up to 5 players")
     with st.form("Exploring points statistics through box plot"):
-        Player_Select3 = col5.multiselect("Select up to 5 players",players["player"].unique(),default=["Michael Jordan","LeBron James"],max_selections=5,key=7)
+        Player_Select3 = col5.multiselect("Select up to 5 players",players_df["player"].unique(),default=["Michael Jordan","LeBron James"],max_selections=5,key=7)
         y_col3 = col5.selectbox("Select a Numeric statistic to compare",["pts","ast","blk","stl"],key=9)
         
         submitted = st.form_submit_button("Submit to produce the histogram")
         
         if submitted:
-            fig2 =  px.box(players[players["player"].isin(Player_Select3)],x="player",y=y_col3,color="player",color_discrete_sequence=color_pallet,title=f"Player Compared by {y_col2}")
+            fig2 =  px.box(players_df[players_df["player"].isin(Player_Select3)],x="player",y=y_col3,color="player",color_discrete_sequence=color_pallet,title=f"Player Compared by {y_col2}")
             col6.plotly_chart(fig2)
     
     
@@ -269,7 +294,7 @@ if selected=='Exploratory Analysis':
     col7,col8 = st.columns([3,5])
     col7.markdown("Select up to 5 players")
     with st.form("Exploring points statistics through ability"):
-        Player_Select4 = col7.multiselect("Select up to 5 players",players["player"].unique(),default=["Michael Jordan","LeBron James"],max_selections=5,key=11)
+        Player_Select4 = col7.multiselect("Select up to 5 players",players_df["player"].unique(),default=["Michael Jordan","LeBron James"],max_selections=5,key=11)
         y_col4 = col7.selectbox("Select a Numeric statistic to compare",["score_diff","asist_diff","block_diff","steal_diff"],key=12)
         
         submitted = st.form_submit_button("Submit to produce the histogram")
@@ -294,7 +319,7 @@ if selected=='Exploratory Analysis':
         submitted = st.form_submit_button("Submit to produce the histogram")
         
         if submitted:
-            fig5 =  px.sunburst(players,path=Path_Select5,values=y_col5,color_discrete_sequence=color_pallet,title=f"Player Compared by {y_col5}")
+            fig5 =  px.sunburst(players_df,path=Path_Select5,values=y_col5,color_discrete_sequence=color_pallet,title=f"Player Compared by {y_col5}")
             col10.plotly_chart(fig5)
     
     
@@ -305,11 +330,11 @@ if selected=='Exploratory Analysis':
     with st.form("Exploring Players Style through sunburst graph"):
         Path_Select6 = col11.multiselect("Select up to 5 players",["player","season","era","lg","tm"],max_selections=5,default=["player"],key=15)
         y_col6 = col11.selectbox("Select a Numeric statistic to compare",["pts","ast","blk","stl"],key=16)
-        Player_Select6 = col11.multiselect("Select up to 5 players",players["player"].unique(),default=["Michael Jordan","LeBron James"],max_selections=5,key=17)
+        Player_Select6 = col11.multiselect("Select up to 5 players",players_df["player"].unique(),default=["Michael Jordan","LeBron James"],max_selections=5,key=17)
         submitted = st.form_submit_button("Submit to produce the Sunburst")
         
         if submitted:
-            fig6 =  px.sunburst(players[players["player"].isin(Player_Select6)],path=Path_Select6,values=y_col6,color_discrete_sequence=color_pallet,title=f"Player Compared by {y_col6}")
+            fig6 =  px.sunburst(players_df[players_df["player"].isin(Player_Select6)],path=Path_Select6,values=y_col6,color_discrete_sequence=color_pallet,title=f"Player Compared by {y_col6}")
             col12.plotly_chart(fig6)
     
     #Seventh Graph
@@ -317,14 +342,14 @@ if selected=='Exploratory Analysis':
     
     col11,col12 = st.columns([3,5])
     with st.form("Exploring Players style through standard deiviation"):
-        player_select7 = col11.multiselect("Select up to 8 players",players["player"].unique(),default=["Michael Jordan","LeBron James"],max_selections=8,key=18)
-        y_col7 = col11.selectbox("Select a Numeric statistic to compare",["pts","ast"],key=19)
+        player_select7 = col11.multiselect("Select up to 8 players",players_df["player"].unique(),default=["Michael Jordan","LeBron James"],max_selections=8,key=18)
+        y_col7 = col11.selectbox("Select a Numeric statistic to compare",["pts","ast","stl","blk","rbd"],key=19)
         comp_type = col11.selectbox("Compare by season or by era",["era","season"],key=20)
         submitted = st.form_submit_button("Submit to produce a bar chart")
         
         if submitted:
             std_mean = get_mean_div(player_select7,stat=y_col7,df_type=comp_type)
-            fig7 = px.bar(std_mean,x="player",y=y_col7+"_diff",hover_data="standard",color_discrete_sequence=color_pallet,title="Players standard deiviation",color="player")
+            fig7 = px.histogram(std_mean,x="player",y="standard",histfunc="avg",hover_data="standard",color_discrete_sequence=color_pallet,title="Players standard deiviation",color="player")
             col12.plotly_chart(fig7)
             
         
@@ -336,9 +361,25 @@ if selected=='Exploratory Analysis':
     
 if selected=='Main Analysis':
     st.title("Main Analysis")
+    col1,col2 = st.columns([3,5])
+    col1.header("First we can compare the simple stats of LeBron and Jordan")
+    col1.markdown("I will be comparing the two players By both offensive stat and defensive stat")
+    fig1 = px.box(players_df[players_df["player"].isin(["Michael Jordan","LeBron James"])],x="player",y="pts",color="player",color_discrete_sequence=color_pallet,title="Player Compared by points")
+    col2.plotly_chart(fig1)
+    fig1 = px.box(players_df[players_df["player"].isin(["Michael Jordan","LeBron James"])],x="player",y="ast",color="player",color_discrete_sequence=color_pallet,title="Player Compared by assist")
+    col2.plotly_chart(fig1)
     
+    col3,col4 = st.columns([3,5])
+    col3.header("First we can compare the simple stats of LeBron and Jordan")
+    fig1 = px.box(players_df[players_df["player"].isin(["Michael Jordan","LeBron James"])],x="player",y="stl",color="player",color_discrete_sequence=color_pallet,title="Player Compared by assist")
+    col4.plotly_chart(fig1)
+    fig1 = px.box(players_df[players_df["player"].isin(["Michael Jordan","LeBron James"])],x="player",y="blk",color="player",color_discrete_sequence=color_pallet,title="Player Compared by assist")
+    col4.plotly_chart(fig1)
     
-    
+    col5,col6 = st.columns([3,5])
+    std_mean2 = get_mean_div(["Michael Jordan","LeBron James"],stat="stl",df_type="era")
+    fig7 = px.histogram(std,x="player",y="standard",histfunc="avg",color_discrete_sequence=color_pallet,title="Players standard deiviation",color="player")
+    col6.plotly_chart(fig7)
     
     
     
@@ -362,6 +403,10 @@ if selected=='Conclusion':
     
 if selected=='Bibliography':
     st.title("Bibliography")
+    st.markdown("The 10 Rules That Changed the NBA Forever,By: Team Dunkest,https://www.dunkest.com/en/nba/news/196560/10-rules-changed-nba, 2025-3-20")
+    st.markdown("NBA Stats (1947-present),By: Sumitro Datta,https://www.kaggle.com/datasets/sumitrodatta/nba-aba-baa-stats/data, 2024-11-15")
+    st.markdown("New York Knickerbockers vs Fort Wayne Pistons Jan. 7, 1950,By: Sports Revisited,https://www.youtube.com/watch?v=_D6eLXIVDRg, 2025-4-2")
+    st.markdown("[FULL] LeBron James The Decision (7/8/2010) | ESPN Archives,By: ESPN,https://www.youtube.com/watch?v=Afpgnb_9bA4, 2025-4-2")
     
     
     
@@ -384,4 +429,4 @@ if selected=='Bibliography':
     
     
     
-
+    

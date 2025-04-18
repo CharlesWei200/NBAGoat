@@ -301,6 +301,72 @@
           "caption": "Article"
         },
         "background": { "color": "#860038" }
+      },
+      {
+        "start_date": {
+          "year": "1993",
+          "month": "2",
+          "day": "1"
+        },
+        "end_date": {
+          "year": "1993",
+          "month": "3",
+          "day": "1"
+        },
+        "text": {
+          "headline": "Michael Jordan's First time retirement",
+          "text": "After winning three NBA titles in a row Michael Jordan decided to retire"
+        },
+        "media": {
+          "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6DUtuEZry0hZ3KHznGUxGqyeytR2jJuP2MQ&s",
+          "credit": "Media Credit",
+          "caption": "Article"
+        },
+        "background": { "color": "#860038" }
+      },
+      {
+        "start_date": {
+          "year": "1998",
+          "month": "2",
+          "day": "1"
+        },
+        "end_date": {
+          "year": "1998",
+          "month": "3",
+          "day": "1"
+        },
+        "text": {
+          "headline": "Michael Jordan's Second time Retirement",
+          "text": "Michael Jordan Retired"
+        },
+        "media": {
+          "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6DUtuEZry0hZ3KHznGUxGqyeytR2jJuP2MQ&s",
+          "credit": "Media Credit",
+          "caption": "Article"
+        },
+        "background": { "color": "#860038" }
+      },
+      {
+        "start_date": {
+          "year": "1998",
+          "month": "2",
+          "day": "1"
+        },
+        "end_date": {
+          "year": "1998",
+          "month": "3",
+          "day": "1"
+        },
+        "text": {
+          "headline": "Michael Jordan's Second time Retirement",
+          "text": "Michael Jordan Retired"
+        },
+        "media": {
+          "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6DUtuEZry0hZ3KHznGUxGqyeytR2jJuP2MQ&s",
+          "credit": "Media Credit",
+          "caption": "Article"
+        },
+        "background": { "color": "#860038" }
       }
     ]
   }
