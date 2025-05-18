@@ -7,7 +7,7 @@ from streamlit_timeline import timeline
 from streamlit_option_menu import option_menu
 import json
 
-file_path = ""
+file_path = "c:/Users/charlesWei/Desktop/DataScience/Basketball1/"
 
 
 st.set_page_config(layout="wide")
@@ -155,7 +155,7 @@ with st.sidebar:
 		options = ['Abstract', 'Timeline','Background Information', 'Data Cleaning','Exploratory Analysis', 'Main Analysis', 'Conclusion', 'Bibliography'],
 		menu_icon = 'dribbble',
 		icons = ['file-person', 'calendar3','backpack3', 'trash', 'map', 'bar-chart-line', 'award', 'browser-chrome'],
-		default_index = 5,
+		default_index = 3,
 		)
 
 
@@ -213,7 +213,102 @@ if selected=='Background Information':
     
 if selected=='Data Cleaning':
     st.title("Data Cleaning")
+    st.header("Why do we need to clean the data set before analysing?")
+    st.write("### This is important because the data sets columns has problems such as data not in the same format which means it can not be analysed")
+    st.divider()
+    st.header("Players Position")
+    st.write("### The Data set that I am using the position column has a problem that it has to many discrete positions such as Point Gard-Small Forward/Power Forward. This stops me from categorizing players and analysing more information so I had to find a way to make the positions less")
+    col1,col2 = st.columns([5,5])
+    col1.write("## Before Cleaning")
+    col1.dataframe(players_df[["player","season","pos"]])
+    col2.write("## After Cleaning")
+    col2.dataframe(shooting[["player","season","clean_pos"]])
+    st.markdown("### ***Click Below To View Code***")
+    with st.expander("",icon=":material/code:"):
+        st.code('''pos_dict = {"SG":"G",
+                    "PG":"G",
+                    "SF":"F",
+                    "PF":"F",
+                    "SG-PG":"G",
+                    "PG-SG":"G",
+                    "SF-PF":"F",
+                    "PF-SF":"F",
+                    "C-F":"F-C",
+                    "F-G":"G-F",
+                    "C-SF":"F-C",
+                    "PG-SF":"G-F",
+                    "SG-PF":"G-F",
+                    "SF-C":"F-C",
+                    "SG-PG-SF":"G-F",
+                    "SG-SF":"G-F",
+                    "PF-C":"C",
+                    "C-PF":"F-C",
+                    "SF-PG":"G-F",
+                    "SF-SG":"G-F"
+                    }
+                
+        shooting["clean_pos"] = shooting["pos"].replace(pos_dict)
+        award["clean_pos"] = players_df["pos"].replace(pos_dict)
+                
+                
+                ''',language="python",line_numbers=True)
+    st.write("### I decided to split to positions into 5 main categories Gaurd as G including point gaurd and shooting gaurd, Forward as F including small forward and power forward, Center as c and two additional positions gaurd forward which include both point gaurd and shooting gaurd and the two forwards, and Forward center which includes the two fowards and center init. I have stored this cleaned version of position in a new column as I might need the specific position in the future So its better not to overide it.")
+    st.divider()
+    st.header("Era")
+    st.write("### For Further analysis I will have to split seasons into era's so that I can create the standard dieviation score column. I don't think it is a fair way to split seasons into eras by each 10 years as it does not have any impact on the game for example a game in 1989 would not be much different from one in 1990 so I decided to determine the eras based on the important rule changes such as removing hand check making offense easier so people in the future season scores more in average")
+    st.markdown("### ***Click Below To View Code***")
     
+    with st.expander("",icon=":material/code:"):
+        st.code('''bins = [1947,1954,1980,1991,2005,2025]
+players_df["era"] = pd.cut(players_df["season"],bins=bins,right=False,labels=["Early NBA","Early Modern Era","80's","90's","Modern NBA"])
+                
+                
+                ''',language="python",line_numbers=True)
+    st.write("### I Have chosen 1947, 1954, 1980, 1991, 2005, 2025 as the boundry for era's as in these years there has been important rule changes made to the NBA league such as banning hand check, adding three point line, adding paint area")
+    st.divider()
+    st.header("Standard Score")
+    st.write("### Standard Score is a score that I have created to compare two different player that has not played in the same era. This score is usefull as players who has played in two different era has played in a different sets of rules, and played with different players that has different play style so simply comparing the basic stats of them is unfair. I have created the score by finding the mean of all player in the era that he has played in and how many standard dieviation he is above or below the mean. In this way I can see how outstanding is the player comparing to other players in the same era I believe that this is the best measurement of players ability")
+    
+    st.markdown("### ***Click Below To View Code***")
+     
+    with st.expander("",icon=":material/code:"):
+         st.code('''def AvgRating(era,stats):
+players_df.loc[players_df["era"]==era,stats].mean()
+
+def get_mean_div(players,stat,df_type):
+    #Getting how the mean and stadard dieviation should be calculated by each era or season the player has played in
+    if df_type == "era":
+        df = players_era
+    elif df_type == "season":
+        df = players_df
+    else:
+        print("df_type not must be era or season")
+        return None
+    #creating a temporary data frame of a copy of player to manipulate the data 
+    temp_df = df[df["player"].isin(players)].reset_index(drop=True).copy()
+    #getting the average for all the other player that has been playing in the group(era,season)
+    group_means = dict(df.groupby(df_type,observed=False)[stat].agg("mean"))
+    #getting the stadard dieviation all the other people in the group
+    group_std = dict(df.groupby(df_type,observed=False)[stat].agg("std"))
+    
+    #finding the players different by subtracting group mean and std by players mean and std
+    def subtract_mean(row):
+        #getting the group values
+        group = row[df_type]
+        #calculating the mean differnt
+        mean_dev = row[stat] - group_means[group]
+        #calculating the std difference
+        standard_score = mean_dev/group_std[group]
+        return mean_dev,standard_score
+    
+    #apply the function to aggragate and find value
+    test = pd.DataFrame(list(temp_df.apply(subtract_mean,axis=1)),columns=[stat+"_diff","standard"])
+    
+    return pd.concat([temp_df,test],axis=1)
+
+                 
+                 
+                 ''',language="python",line_numbers=True)       
     
     
     
@@ -363,31 +458,41 @@ if selected=='Main Analysis':
     st.title("Main Analysis")
     col1,col2 = st.columns([3,5])
     col1.header("First we can compare the simple stats of LeBron and Jordan")
-    col1.markdown("I will be comparing the two players By both offensive stat and defensive stat")
+    col1.markdown("### I will be comparing the two players By both offensive stat and defensive stats In this section I will compare the most basic stats of the two player such as point scored per game and assist per game.")
+    col1.divider()
+    col1.header("Comparing Offensive stats of player")
+    col1.write("### As the box plot has shown on the right Michael Jordan is able to score more on aveerage and has a higher maximum points scored than Lebron, however lebron James has a smaller interquartile range so LeBron James can score more constantly")
+    col1.write("### However, Lebron James has a higher average assist per game This means that LeBron James is able to make more plays score more points working with his teammates.")
     fig1 = px.box(players_df[players_df["player"].isin(["Michael Jordan","LeBron James"])],x="player",y="pts",color="player",color_discrete_sequence=color_pallet,title="Player Compared by points")
     col2.plotly_chart(fig1)
     fig1 = px.box(players_df[players_df["player"].isin(["Michael Jordan","LeBron James"])],x="player",y="ast",color="player",color_discrete_sequence=color_pallet,title="Player Compared by assist")
     col2.plotly_chart(fig1)
     
     col3,col4 = st.columns([3,5])
-    col3.header("First we can compare the simple stats of LeBron and Jordan")
-    fig1 = px.box(players_df[players_df["player"].isin(["Michael Jordan","LeBron James"])],x="player",y="stl",color="player",color_discrete_sequence=color_pallet,title="Player Compared by assist")
+    col3.header("Compare the simple Defensive stats of LeBron and Jordan")
+    col3.write("### Michael Jordan can get more steals on average this means that he is a better outlite defender and he can help is team to score more points from stealing.")
+    col3.write("### Lebron James is better on blocking players this helps his team from reducing the enemy team from scoring. This is understandable as the position that LeBron and Jordan is playing on is different as Jordan is a Shooting Gaurd so he is better at gaurding outlit so he is able to steal more balls. And LeBron is a power forward so he works more in the paint and he's body is better at defending inside so easier to get more blocks.")
+    fig1 = px.box(players_df[players_df["player"].isin(["Michael Jordan","LeBron James"])],x="player",y="stl",color="player",color_discrete_sequence=color_pallet,title="Player Compared by steals")
     col4.plotly_chart(fig1)
-    fig1 = px.box(players_df[players_df["player"].isin(["Michael Jordan","LeBron James"])],x="player",y="blk",color="player",color_discrete_sequence=color_pallet,title="Player Compared by assist")
+    fig1 = px.box(players_df[players_df["player"].isin(["Michael Jordan","LeBron James"])],x="player",y="blk",color="player",color_discrete_sequence=color_pallet,title="Player Compared by blocks")
     col4.plotly_chart(fig1)
     
     col5,col6 = st.columns([3,5])
+    col5.title("Standard Deiviation Score")
+    col5.write("### I decided to use standard score to compare the two  players Standard score is a score based on how the players stats compare to the average stats  of other players who played in their era. This score  is fair because it shows how they have dominated in their time and how much better they are playing in the same sets of rules")
+#    col5.caption("Standard score is a score given in numbers of dieviation  the player is apart from the average player that played in their era")
     std_mean2 = get_mean_div(["Michael Jordan","LeBron James"],stat="stl",df_type="era")
     fig7 = px.histogram(std,x="player",y="standard",histfunc="avg",color_discrete_sequence=color_pallet,title="Players standard deiviation",color="player")
+
     col6.plotly_chart(fig7)
-    
+#    st.badge("StandardScore")  https://docs.streamlit.io/develop/api-reference/text/st.badge
     
     
     
     
 if selected=='Conclusion':
     st.title("Conclusion")
-    
+    st.write("### In conclusion Michael Jordan and LeBron James are both outstanding or considerably the best player in their era that they have been playing in. They have both dominated in their era. However, it is hard to say which player is better as they has different style of game and they play in different position Michael Jordan is better at dominating the game by him self scoring stealing the ball. But LeBron James is a more team player he can help his teammates to score better to win the game and blocking shoots. By comparing all the stats of both player I would say that Michael Jordan is a better player as Jordan is a way better scorer than LeBron is at assisting and I believe that to determine who is a better player, the player should have the ablity to score and win by them selves so in that case Jordan is a better  player")
     
     
     
@@ -403,11 +508,25 @@ if selected=='Conclusion':
     
 if selected=='Bibliography':
     st.title("Bibliography")
-    st.markdown("The 10 Rules That Changed the NBA Forever,By: Team Dunkest,https://www.dunkest.com/en/nba/news/196560/10-rules-changed-nba, 2025-3-20")
-    st.markdown("NBA Stats (1947-present),By: Sumitro Datta,https://www.kaggle.com/datasets/sumitrodatta/nba-aba-baa-stats/data, 2024-11-15")
-    st.markdown("New York Knickerbockers vs Fort Wayne Pistons Jan. 7, 1950,By: Sports Revisited,https://www.youtube.com/watch?v=_D6eLXIVDRg, 2025-4-2")
-    st.markdown("[FULL] LeBron James The Decision (7/8/2010) | ESPN Archives,By: ESPN,https://www.youtube.com/watch?v=Afpgnb_9bA4, 2025-4-2")
-    
+    st.markdown("[1] The 10 Rules That Changed the NBA Forever,By: Team Dunkest,https://www.dunkest.com/en/nba/news/196560/10-rules-changed-nba, 2025-3-20")
+    st.markdown("[2] NBA Stats (1947-present),By: Sumitro Datta,https://www.kaggle.com/datasets/sumitrodatta/nba-aba-baa-stats/data, 2024-11-15")
+    st.markdown("[3] New York Knickerbockers vs Fort Wayne Pistons Jan. 7, 1950,By: Sports Revisited,https://www.youtube.com/watch?v=_D6eLXIVDRg, 2025-4-2")
+    st.markdown("[4] [FULL] LeBron James The Decision (7/8/2010) | ESPN Archives,By: ESPN,https://www.youtube.com/watch?v=Afpgnb_9bA4, 2025-4-2")
+    st.markdown("[5] Image ,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6DUtuEZry0hZ3KHznGUxGqyeytR2jJuP2MQ&s, 2025-4-2")
+    st.markdown("[6] Image ,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6DUtuEZry0hZ3KHznGUxGqyeytR2jJuP2MQ&s, 2025-4-2")
+    st.markdown("[7] Image ,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTD-XoahiYRE3svZD-WYx9S92coR8QGPVl2Q&s, 2025-4-2")
+    st.markdown("[8] Image ,https://e0.365dm.com/20/10/2048x1152/skysports-lebron-james-anthony-davis_5138168.jpg?20201014102448, 2025-4-2")
+    st.markdown("[9]Image ,https://m.media-amazon.com/images/I/51oaUD8NcLL._AC_UF894,1000_QL80_.jpg, 2025-4-2")
+    st.markdown("[10] Image ,https://cdn.nba.com/manage/2021/07/GettyImages-2928222.jpg, 2025-4-2")
+    st.markdown("[11] Image ,https://cdn.nba.com/manage/2021/07/GettyImages-2928222.jpg, 2025-4-2")
+    st.markdown("[12] Image ,https://www.rollingstone.com/wp-content/uploads/2020/05/the-last-dance-eps-5-6.jpg?w=1581&h=1054&crop=1, 2025-4-2")
+    st.markdown("[13] Image ,https://dims.apnews.com/dims4/default/323aff6/2147483647/strip/true/crop/2000x2559+0+0/resize/468x599!/quality/90/?url=https%3A%2F%2Fstorage.googleapis.com%2Fafs-prod%2Fmedia%2Ffd45e78526234a1b8d103856ed41d427%2F2000.jpeg, 2025-4-2")
+    st.markdown("[14] Image ,https://pbs.twimg.com/media/FVnuGVsWIAAWXgO.jpg:large, 2025-4-2")
+    st.markdown("[15] Image ,https://a.espncdn.com/photo/2019/0414/r528886_1296x729_16-9.jpg, 2025-4-2")
+    st.markdown("[16] Image ,https://cdn.nba.com/teams/legacy/i.cdn.turner.com/nba/nba/.element/media/2.0/teamsites/bucks/90s-players-ewing.jpg, 2025-4-2")
+    st.markdown("[17] Image ,https://cdn.nba.com/manage/2021/07/GettyImages-1737696-1568x882.jpg, 2025-4-2")
+    st.markdown("[18] Image ,https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Wilt_Chamberlain_100_Point_Game_1962_%28original%29.jpg/250px-Wilt_Chamberlain_100_Point_Game_1962_%28original%29.jpg, 2025-4-2")
+    st.markdown("[19] Image ,https://www.nba.com/, 2025-4-2")
     
     
     

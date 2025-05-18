@@ -1,372 +1,338 @@
 {
-    "events": [
-      {
-        "text": {
-          "headline": "Google Spreadsheet Example",
-          "text": "This is a test of using google spreadsheets as a source for the timeline tool. This is a 'title' slide, so it doesn't need a date. It automatically occurs first, and doesn't appear in the timeline below."
-        },
-        "media": {
-          "url": "https://www.nba.com/",
-          "credit": "Zach Wise/verite.co",
-          "caption": "<a href=\"https://www.nba.com/\" title=\"NBA\">Chicago by zach.wise</a>"
-        },
-        "type": "title"
+  "events": [
+    {
+      "start_date": {
+        "year": "1947",
+        "month": "11",
+        "day": "1"
       },
-      {
-        "start_date": {
-          "year": "1947",
-          "month": "11",
-          "day": "1"
-        },
-        "end_date": {
-          "year": "1948",
-          "month": "12",
-          "day": "15"
-        },
-        "text": {
-          "headline": "Early NBA",
-          "text": "NBA Banned the zone defense"
-        },
-        "media": {
-          "url": "https://www.youtube.com/watch?v=_D6eLXIVDRg",
-          "credit": "Zach Wise/verite.co",
-          "caption": "Chicago to NYC"
-        },
-        "background": { "color": "#333333" }
+      "end_date": {
+        "year": "1948",
+        "month": "12",
+        "day": "15"
       },
-      {
-        "start_date": {
-          "year": "1954",
-          "month": "11",
-          "day": "16",
-          "hour": "05",
-          "minute": "58",
-          "second": "44"
-        },
-        "end_date": {
-          "year": "1955",
-          "month": "11",
-          "day": "16",
-          "hour": "07",
-          "minute": "30"
-        },
-        "text": {
-          "headline": "Early Modern NBA",
-          "text": "Introducing The 24s zone"
-        },
-        "media": {
-          "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Wilt_Chamberlain_100_Point_Game_1962_%28original%29.jpg/250px-Wilt_Chamberlain_100_Point_Game_1962_%28original%29.jpg",
-          "credit": "Youtube",
-          "caption": "This was how basketball was like before 1951.",
-          "thumbnail": "https://knightlab.northwestern.edu/wp-content/uploads/2015/03/front-page-image.jpg"
-        }
+      "text": {
+        "headline": "Early NBA",
+        "text": "NBA Banned the zone defense"
       },
-      {
-        "start_date": {
-          "year": "1980",
-          "month": "2",
-          "day": "1"
-        },
-        "end_date": {
-          "year": "1981",
-          "month": "2",
-          "day": "1"
-        },
-        "text": {
-          "headline": "The 80's",
-          "text": "Introducing the Three point line"
-        },
-        "media": {
-          "url": "https://cdn.nba.com/manage/2021/07/GettyImages-1737696-1568x882.jpg",
-          "credit": "Media Credit",
-          "caption": "Article"
-        }
+      "media": {
+        "url": "https://www.youtube.com/watch?v=_D6eLXIVDRg",
+        "credit": "Zach Wise/verite.co <sup>1</sup>",
+        "caption": "Chicago to NYC"
       },
-      {
-        "start_date": {
-          "year": "1995",
-          "month": "2",
-          "day": "1"
-        },
-        "end_date": {
-          "year": "1996",
-          "month": "2",
-          "day": "1"
-        },
-        "text": {
-          "headline": "The 90's",
-          "text": "Banning hand check with closer three point line"
-        },
-        "media": {
-          "url": "https://cdn.nba.com/teams/legacy/i.cdn.turner.com/nba/nba/.element/media/2.0/teamsites/bucks/90s-players-ewing.jpg",
-          "credit": "Media Credit",
-          "caption": "Article"
-        }
+      "background": { "color": "#333333" }
+    },
+    {
+      "start_date": {
+        "year": "1954",
+        "month": "11",
+        "day": "16",
+        "hour": "05",
+        "minute": "58",
+        "second": "44"
       },
-      {
-        "start_date": {
-          "year": "2005",
-          "month": "2",
-          "day": "1"
-        },
-        "end_date": {
-          "year": "2006",
-          "month": "2",
-          "day": "1"
-        },
-        "text": {
-          "headline": "Modern NBA",
-          "text": "Hand check permenantly banned"
-        },
-        "media": {
-          "url": "https://a.espncdn.com/photo/2019/0414/r528886_1296x729_16-9.jpg",
-          "credit": "Media Credit",
-          "caption": "Article"
-        },
-        "background": { "color": "#006BB6" }
+      "end_date": {
+        "year": "1955",
+        "month": "11",
+        "day": "16",
+        "hour": "07",
+        "minute": "30"
       },
-      {
-        "start_date": {
-          "year": "1984",
-          "month": "2",
-          "day": "1"
-        },
-        "end_date": {
-          "year": "1984",
-          "month": "3",
-          "day": "1"
-        },
-        "text": {
-          "headline": "Michael Jordan",
-          "text": "Year When Michael Jordan got drafted"
-        },
-        "media": {
-          "url": "https://pbs.twimg.com/media/FVnuGVsWIAAWXgO.jpg:large",
-          "credit": "Media Credit",
-          "caption": "Article"
-        },
-        "background": { "color": "#CF093F" }
+      "text": {
+        "headline": "Early Modern NBA",
+        "text": "Introducing The 24s zone"
       },
-      {
-        "start_date": {
-          "year": "2003",
-          "month": "2",
-          "day": "1"
-        },
-        "end_date": {
-          "year": "2003",
-          "month": "3",
-          "day": "1"
-        },
-        "text": {
-          "headline": "LeBron James",
-          "text": "Year When LeBron James got drafted"
-        },
-        "media": {
-          "url": "https://dims.apnews.com/dims4/default/323aff6/2147483647/strip/true/crop/2000x2559+0+0/resize/468x599!/quality/90/?url=https%3A%2F%2Fstorage.googleapis.com%2Fafs-prod%2Fmedia%2Ffd45e78526234a1b8d103856ed41d427%2F2000.jpeg",
-          "credit": "Media Credit",
-          "caption": "Article"
-        },
-        "background": { "color": "#860038" }
-      },
-      {
-        "start_date": {
-          "year": "1991",
-          "month": "2",
-          "day": "1"
-        },
-        "end_date": {
-          "year": "1993",
-          "month": "3",
-          "day": "1"
-        },
-        "text": {
-          "headline": "Jordan's First three-peat",
-          "text": "Three consecutive champoinships"
-        },
-        "media": {
-          "url": "https://www.rollingstone.com/wp-content/uploads/2020/05/the-last-dance-eps-5-6.jpg?w=1581&h=1054&crop=1",
-          "credit": "Media Credit",
-          "caption": "Article"
-        },
-        "background": { "color": "#CF093F" }
-      },
-      {
-        "start_date": {
-          "year": "1996",
-          "month": "2",
-          "day": "1"
-        },
-        "end_date": {
-          "year": "1998",
-          "month": "3",
-          "day": "1"
-        },
-        "text": {
-          "headline": "Jordan's Second three-peat",
-          "text": "Three consecutive champoinships Again after two year of retirement"
-        },
-        "media": {
-          "url": "https://cdn.nba.com/manage/2021/07/GettyImages-2928222.jpg",
-          "credit": "Media Credit",
-          "caption": "Article"
-        },
-        "background": { "color": "#CF093F"}
-      },
-      {
-        "start_date": {
-          "year": "2010",
-          "month": "2",
-          "day": "1"
-        },
-        "end_date": {
-          "year": "2011",
-          "month": "3",
-          "day": "1"
-        },
-        "text": {
-          "headline": "Heats",
-          "text": "LeBron Decided to Join the Heats with wade and bosh after years of lossing"
-        },
-        "media": {
-          "url": "https://www.youtube.com/watch?v=Afpgnb_9bA4",
-          "credit": "Media Credit",
-          "caption": "Article"
-        },
-        "background": { "color": "#98002E"}
-      },
-      {
-        "start_date": {
-          "year": "2012",
-          "month": "2",
-          "day": "1"
-        },
-        "end_date": {
-          "year": "2013",
-          "month": "3",
-          "day": "1"
-        },
-        "text": {
-          "headline": "LeBron Back to Back Champion",
-          "text": "After Two years at the Heat's LeBron won back to back Championship's in 2012 and 2013"
-        },
-        "media": {
-          "url": "https://m.media-amazon.com/images/I/51oaUD8NcLL._AC_UF894,1000_QL80_.jpg",
-          "credit": "Media Credit",
-          "caption": "Article"
-        },
-        "background": { "color": "#98002E"}
+      "media": {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Wilt_Chamberlain_100_Point_Game_1962_%28original%29.jpg/250px-Wilt_Chamberlain_100_Point_Game_1962_%28original%29.jpg",
+        "credit": "Youtube",
+        "caption": "This was how basketball was like before 1951.",
+        "thumbnail": "https://knightlab.northwestern.edu/wp-content/uploads/2015/03/front-page-image.jpg"
       }
-      ,
-      {
-        "start_date": {
-          "year": "2020",
-          "month": "2",
-          "day": "1"
-        },
-        "end_date": {
-          "year": "2020",
-          "month": "3",
-          "day": "1"
-        },
-        "text": {
-          "headline": "LeBron Champion",
-          "text": "At the year of covid LeBron wins the championship with anthony davies"
-        },
-        "media": {
-          "url": "https://e0.365dm.com/20/10/2048x1152/skysports-lebron-james-anthony-davis_5138168.jpg?20201014102448",
-          "credit": "Media Credit",
-          "caption": "Article"
-        },
-        "background": { "color": "#542583" }
+    },
+    {
+      "start_date": {
+        "year": "1980",
+        "month": "2",
+        "day": "1"
       },
-      {
-        "start_date": {
-          "year": "2016",
-          "month": "2",
-          "day": "1"
-        },
-        "end_date": {
-          "year": "2016",
-          "month": "3",
-          "day": "1"
-        },
-        "text": {
-          "headline": "LeBron Champion At Cav",
-          "text": "After the Injury of Bosh Lebron decided to go back to Cavaliers and play with Kyrie"
-        },
-        "media": {
-          "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTD-XoahiYRE3svZD-WYx9S92coR8QGPVl2Q&s",
-          "credit": "Media Credit",
-          "caption": "Article"
-        },
-        "background": { "color": "#860038" }
+      "end_date": {
+        "year": "1981",
+        "month": "2",
+        "day": "1"
       },
-      {
-        "start_date": {
-          "year": "1993",
-          "month": "2",
-          "day": "1"
-        },
-        "end_date": {
-          "year": "1993",
-          "month": "3",
-          "day": "1"
-        },
-        "text": {
-          "headline": "Michael Jordan's First time retirement",
-          "text": "After winning three NBA titles in a row Michael Jordan decided to retire"
-        },
-        "media": {
-          "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6DUtuEZry0hZ3KHznGUxGqyeytR2jJuP2MQ&s",
-          "credit": "Media Credit",
-          "caption": "Article"
-        },
-        "background": { "color": "#860038" }
+      "text": {
+        "headline": "The 80's",
+        "text": "Introducing the Three point line"
       },
-      {
-        "start_date": {
-          "year": "1998",
-          "month": "2",
-          "day": "1"
-        },
-        "end_date": {
-          "year": "1998",
-          "month": "3",
-          "day": "1"
-        },
-        "text": {
-          "headline": "Michael Jordan's Second time Retirement",
-          "text": "Michael Jordan Retired"
-        },
-        "media": {
-          "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6DUtuEZry0hZ3KHznGUxGqyeytR2jJuP2MQ&s",
-          "credit": "Media Credit",
-          "caption": "Article"
-        },
-        "background": { "color": "#860038" }
-      },
-      {
-        "start_date": {
-          "year": "1998",
-          "month": "2",
-          "day": "1"
-        },
-        "end_date": {
-          "year": "1998",
-          "month": "3",
-          "day": "1"
-        },
-        "text": {
-          "headline": "Michael Jordan's Second time Retirement",
-          "text": "Michael Jordan Retired"
-        },
-        "media": {
-          "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6DUtuEZry0hZ3KHznGUxGqyeytR2jJuP2MQ&s",
-          "credit": "Media Credit",
-          "caption": "Article"
-        },
-        "background": { "color": "#860038" }
+      "media": {
+        "url": "https://cdn.nba.com/manage/2021/07/GettyImages-1737696-1568x882.jpg",
+        "credit": "Media Credit",
+        "caption": "Article"
       }
-    ]
-  }
+    },
+    {
+      "start_date": {
+        "year": "1995",
+        "month": "2",
+        "day": "1"
+      },
+      "end_date": {
+        "year": "1996",
+        "month": "2",
+        "day": "1"
+      },
+      "text": {
+        "headline": "The 90's",
+        "text": "Banning hand check with closer three point line"
+      },
+      "media": {
+        "url": "https://cdn.nba.com/teams/legacy/i.cdn.turner.com/nba/nba/.element/media/2.0/teamsites/bucks/90s-players-ewing.jpg",
+        "credit": "Media Credit",
+        "caption": "Article"
+      }
+    },
+    {
+      "start_date": {
+        "year": "2005",
+        "month": "2",
+        "day": "1"
+      },
+      "end_date": {
+        "year": "2006",
+        "month": "2",
+        "day": "1"
+      },
+      "text": {
+        "headline": "Modern NBA",
+        "text": "Hand check permenantly banned"
+      },
+      "media": {
+        "url": "https://a.espncdn.com/photo/2019/0414/r528886_1296x729_16-9.jpg",
+        "credit": "Media Credit",
+        "caption": "Article"
+      },
+      "background": { "color": "#006BB6" }
+    },
+    {
+      "start_date": {
+        "year": "1984",
+        "month": "2",
+        "day": "1"
+      },
+      "end_date": {
+        "year": "1984",
+        "month": "3",
+        "day": "1"
+      },
+      "text": {
+        "headline": "Michael Jordan",
+        "text": "Year When Michael Jordan got drafted"
+      },
+      "media": {
+        "url": "https://pbs.twimg.com/media/FVnuGVsWIAAWXgO.jpg:large",
+        "credit": "Media Credit",
+        "caption": "Article"
+      },
+      "background": { "color": "#CF093F" }
+    },
+    {
+      "start_date": {
+        "year": "2003",
+        "month": "2",
+        "day": "1"
+      },
+      "end_date": {
+        "year": "2003",
+        "month": "3",
+        "day": "1"
+      },
+      "text": {
+        "headline": "LeBron James",
+        "text": "Year When LeBron James got drafted"
+      },
+      "media": {
+        "url": "https://dims.apnews.com/dims4/default/323aff6/2147483647/strip/true/crop/2000x2559+0+0/resize/468x599!/quality/90/?url=https%3A%2F%2Fstorage.googleapis.com%2Fafs-prod%2Fmedia%2Ffd45e78526234a1b8d103856ed41d427%2F2000.jpeg",
+        "credit": "Media Credit",
+        "caption": "Article"
+      },
+      "background": { "color": "#860038" }
+    },
+    {
+      "start_date": {
+        "year": "1991",
+        "month": "2",
+        "day": "1"
+      },
+      "end_date": {
+        "year": "1993",
+        "month": "3",
+        "day": "1"
+      },
+      "text": {
+        "headline": "Jordan's First three-peat",
+        "text": "Three consecutive champoinships"
+      },
+      "media": {
+        "url": "https://www.rollingstone.com/wp-content/uploads/2020/05/the-last-dance-eps-5-6.jpg?w=1581&h=1054&crop=1",
+        "credit": "Media Credit",
+        "caption": "Article"
+      },
+      "background": { "color": "#CF093F" }
+    },
+    {
+      "start_date": {
+        "year": "1996",
+        "month": "2",
+        "day": "1"
+      },
+      "end_date": {
+        "year": "1998",
+        "month": "3",
+        "day": "1"
+      },
+      "text": {
+        "headline": "Jordan's Second three-peat",
+        "text": "Three consecutive champoinships Again after two year of retirement"
+      },
+      "media": {
+        "url": "https://cdn.nba.com/manage/2021/07/GettyImages-2928222.jpg",
+        "credit": "Media Credit",
+        "caption": "Article"
+      },
+      "background": { "color": "#CF093F"}
+    },
+    {
+      "start_date": {
+        "year": "2010",
+        "month": "2",
+        "day": "1"
+      },
+      "end_date": {
+        "year": "2011",
+        "month": "3",
+        "day": "1"
+      },
+      "text": {
+        "headline": "Heats",
+        "text": "LeBron Decided to Join the Heats with wade and bosh after years of lossing"
+      },
+      "media": {
+        "url": "https://www.youtube.com/watch?v=Afpgnb_9bA4",
+        "credit": "Media Credit",
+        "caption": "Article"
+      },
+      "background": { "color": "#98002E"}
+    },
+    {
+      "start_date": {
+        "year": "2012",
+        "month": "2",
+        "day": "1"
+      },
+      "end_date": {
+        "year": "2013",
+        "month": "3",
+        "day": "1"
+      },
+      "text": {
+        "headline": "LeBron Back to Back Champion",
+        "text": "After Two years at the Heat's LeBron won back to back Championship's in 2012 and 2013"
+      },
+      "media": {
+        "url": "https://m.media-amazon.com/images/I/51oaUD8NcLL._AC_UF894,1000_QL80_.jpg",
+        "credit": "Media Credit",
+        "caption": "Article"
+      },
+      "background": { "color": "#98002E"}
+    }
+    ,
+    {
+      "start_date": {
+        "year": "2020",
+        "month": "2",
+        "day": "1"
+      },
+      "end_date": {
+        "year": "2020",
+        "month": "3",
+        "day": "1"
+      },
+      "text": {
+        "headline": "LeBron Champion",
+        "text": "At the year of covid LeBron wins the championship with anthony davies"
+      },
+      "media": {
+        "url": "https://e0.365dm.com/20/10/2048x1152/skysports-lebron-james-anthony-davis_5138168.jpg?20201014102448",
+        "credit": "Media Credit",
+        "caption": "Article"
+      },
+      "background": { "color": "#542583" }
+    },
+    {
+      "start_date": {
+        "year": "2016",
+        "month": "2",
+        "day": "1"
+      },
+      "end_date": {
+        "year": "2016",
+        "month": "3",
+        "day": "1"
+      },
+      "text": {
+        "headline": "LeBron Champion At Cav",
+        "text": "After the Injury of Bosh Lebron decided to go back to Cavaliers and play with Kyrie"
+      },
+      "media": {
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTD-XoahiYRE3svZD-WYx9S92coR8QGPVl2Q&s",
+        "credit": "Media Credit",
+        "caption": "Article"
+      },
+      "background": { "color": "#860038" }
+    },
+    {
+      "start_date": {
+        "year": "1993",
+        "month": "2",
+        "day": "1"
+      },
+      "end_date": {
+        "year": "1993",
+        "month": "3",
+        "day": "1"
+      },
+      "text": {
+        "headline": "Michael Jordan's First time retirement",
+        "text": "After winning three NBA titles in a row Michael Jordan decided to retire"
+      },
+      "media": {
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6DUtuEZry0hZ3KHznGUxGqyeytR2jJuP2MQ&s",
+        "credit": "Media Credit",
+        "caption": "Article"
+      },
+      "background": { "color": "#860038" }
+    },
+    {
+      "start_date": {
+        "year": "1998",
+        "month": "2",
+        "day": "1"
+      },
+      "end_date": {
+        "year": "1998",
+        "month": "3",
+        "day": "1"
+      },
+      "text": {
+        "headline": "Michael Jordan's Second time Retirement",
+        "text": "Michael Jordan Retired"
+      },
+      "media": {
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6DUtuEZry0hZ3KHznGUxGqyeytR2jJuP2MQ&s",
+        "credit": "Media Credit",
+        "caption": "Article"
+      },
+      "background": { "color": "#860038" }
+    }
+  ]
+}
