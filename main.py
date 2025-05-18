@@ -200,7 +200,7 @@ if selected=='Background Information':
     col1.markdown("""I have found data sets on kaggle about all the data's in the previous NBA season which include point scored assist and many others I have chosen three main data set to use one standard information and one about a award, However it is unfair to compare player from different era's
                   based on simple statistics such as points scored because they have played in different sets of rules and the skills sets, for example banning handcheck for defending makes scoring much more easier and smaller players are able to play players has been scoring way more than before. Therefore I have decided to calculate a standard value to compare them. By using the mean and standard deiviation of all the other players that have
                   played in their era.By calculating how many standard dieviation away from other player that has played in there era I can see how stand out LeBron or Jordan is from their era I believe that by this is a fair way to compare the two players. Additionally Jordan and LeBron have played different amounts of games so using the average stats per game is a better way to compare them.""")
-    col2.image(file_path+"Jordan_Lebron.png")
+    col2.image(file_path+"Jordan_lebron.png")
     col1.markdown("I will be also comparing the effeciency of the two players by using the shooting percentage as high points could be achieved by taking more shoots which does not benifits the team for winning which means that it can not show that the player is better.")
         
     
